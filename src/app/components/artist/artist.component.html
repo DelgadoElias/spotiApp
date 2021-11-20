@@ -1,0 +1,49 @@
+<app-loading *ngIf="loading"></app-loading>
+
+<div class="row animated fadeIn">
+
+    <!-- Imágen -->
+    <div class="col-2">
+        <img [src]="artist.images | noimage" class="img-thumbnail img-circle" alt="There's no image">
+    </div>
+    <!-- Información principal -->
+    <div class="col">
+        <h3>{{ artist.name }}</h3>
+        <p> <a [href]="artist.external_urls.spotify" target="_blank">Ir a la página del artista</a></p>
+    </div>
+    <!-- Regresar a la página anterior -->
+    <div class="col-4 text-right">
+
+        <button routerLink="/search" class="btn btn-outline-success">
+        Regresar
+      </button>
+
+    </div>
+
+</div>
+
+<div class="row animated fadeIn">
+    <div class="col">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Foto</th>
+                    <th>Album</th>
+                    <th>Cancion</th>
+                    <th>Vista previa</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let tracka of tracks">
+                    <td> <img style="width: 30px; height: 30px" [src]="tracka.album.images | noimage" class="" alt="No image found"></td>
+                    <td> <p>  {{tracka.album.name}} </p> </td>
+                    <td> <p> <a  style="text-decoration: none; color: #fff" [href]="tracka.external_urls.spotify" target="_blank"> {{tracka.name}} </a></p> </td>
+                    <td>
+                        <iframe [src]="tracka.uri | domseguro" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
